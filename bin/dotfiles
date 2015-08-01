@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+#
+# dotfiles
+# https://github.com/hertzz/dotfiles
+#
+
+set -e
+
+BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+. $BASE_DIR/config.sh
+
+function main() {
+  log info "Starting..."
+
+  for HANDLER in ${HANDLERS_ENABLED[*]}; do
+    log info "Loading \"${HANDLER}\" handler..."
+    if [ ! -d "${BASE_DIR}/${HANDLER}" ]; then
+      log error "Couldn't find \"${HANDLER}\" handler!" && exit 1
+    else
+      if [ ! -f "${BASE_DIR}/${HANDLER}/${HANDLER}.sh" ]; then
+        log error "Couldn't find \"${HANDLER}\" handler controller!" && exit 1
+      fi
+    fi
+  done
+}
+
+function log() {
+  local TIME="$(date +%s)"
+  local LEVEL="$(echo $1 | tr '[:lower:]' '[:upper:]')"
+  local MESSAGE="$2"
+  local GAP=""
+
+  if [[ $LEVEL == "INFO" ]]; then
+    GAP=" -- "
+  elif [[ $LEVEL == "ERROR" ]]; then
+    GAP="-- "
+  fi
+
+  echo "[dotfiles/${TIME}]  ${LEVEL} ${GAP} ${MESSAGE}"
+}
+
+function setup_files() {
+  :
+}
+
+main
