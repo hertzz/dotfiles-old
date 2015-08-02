@@ -1,1 +1,0 @@
-/Users/tom/Development/hertzz/dotfiles/bin/../handlers/vim/files/.vim
