@@ -9,7 +9,7 @@ $ git clone git@github.com:hertzz/dotfiles.git ~/dotfiles
 
 ### Running
 ```bash
-$ dotfiles
+$ ~/dotfiles/bin/dotfiles
 ```
 
 ### Handlers
@@ -40,7 +40,7 @@ By default, the home directory is based off the `$HOME` environment variable.
 To update your dot files with the latest content from your GitHub fork, you need to pull your repository and re-run the dotfiles executable:
 ```bash
 $ cd ~/dotfiles && git pull
-$ dotfiles
+$ ./bin/dotfiles
 ```
 
 ### Making changes
