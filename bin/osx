@@ -1,0 +1,201 @@
+#!/usr/bin/env bash
+#
+# dotfiles
+# https://github.com/hertzz/dotfiles
+#
+# Sensible defaults gratuitously borrowed from:
+# https://github.com/mathiasbynens/dotfiles/.osx
+#
+
+function log() {
+  local MESSAGE="$1"
+  echo "[osx-defaults] -> ${MESSAGE}"
+}
+
+log "Setting OS X defaults..."
+
+log "Setting highlight color to green"
+defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
+
+log "Always show scrollbars"
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+
+log "Expand save panels by default"
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+log "Auto-restart OS X on freeze"
+sudo systemsetup -setrestartfreeze on
+
+log "Never goto system sleep"
+sudo systemsetup -setcomputersleep Off > /dev/null
+
+log "Check for software updates daily"
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+log "Disable timemachine snapshots"
+sudo tmutil disablelocal
+
+log "Disable hibernation mode"
+sudo pmset -a hibernatemode 0
+
+log "Disable sudden motion sensor"
+sudo pmset -a sms 0
+
+log "Map bottom right corner of trackpad to right-click"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+
+log "Fast keyboard repeat rate"
+defaults write NSGlobalDomain KeyRepeat -int 0
+
+log "Disable auto correct"
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+log "Require password after wake immediately"
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+log "Save screenshots to desktop as PNG"
+defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+defaults write com.apple.screencapture type -string "png"
+defaults write com.apple.screencapture disable-shadow -bool true
+
+log "Show removable media/remote media icons on desktop"
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+
+log "Show file extensions"
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+log "Show Finder status bar"
+defaults write com.apple.finder ShowStatusBar -bool true
+
+log "Show Finder path bar"
+defaults write com.apple.finder ShowPathbar -bool true
+
+log "Show Finder POSSIX path in window"
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+log "Search current directory by default"
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+log "Disable file extension change warning"
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+log "Enable directory spring loading"
+defaults write NSGlobalDomain com.apple.springing.enabled -bool true
+defaults write NSGlobalDomain com.apple.springing.delay -float 0
+
+log "Skip creating .DS_Store on network volumes"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+log "Empty trash securely"
+defaults write com.apple.finder EmptyTrashSecurely -bool true
+
+log "Show the library directory"
+chflags nohidden ~/Library
+
+log "Enable dock grid highlight"
+defaults write com.apple.dock mouse-over-hilite-stack -bool true
+
+log "Set window min/max effect to scale"
+defaults write com.apple.dock mineffect -string "scale"
+
+log "Minimise windows into their Dock icon"
+defaults write com.apple.dock minimize-to-application -bool true
+
+log "Enable spring loading for dock icons"
+defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
+
+log "Show dock open indicator icons"
+defaults write com.apple.dock show-process-indicators -bool true
+
+log "Disable dashboard"
+defaults write com.apple.dashboard mcx-disabled -bool true
+defaults write com.apple.dock dashboard-in-overlay -bool true
+
+log "Don't rearrange spaces based on most used"
+defaults write com.apple.dock mru-spaces -bool false
+
+log "Make dock icons of hidden applications translucent"
+defaults write com.apple.dock showhidden -bool true
+
+log "Don't send search queries to Apple"
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+
+log "Enable Safari tab selecting"
+defaults write com.apple.Safari WebKitTabToLinksPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true
+
+log "Show full URL in Safari"
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+
+log "Set Safari default load page to about:blank"
+defaults write com.apple.Safari HomePage -string "about:blank"
+
+log "Prevent Safari auto-open safe files"
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+
+log "Allow Safari old-backspace behaviour"
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
+
+log "Enable Safari debug menu"
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+
+log "Remove useless icons from Safari bookmarks bar"
+defaults write com.apple.Safari ProxiesInBookmarksBar "()"
+
+log "Enable developer menus in Safari"
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+log "Add web inspector context menu in Safari web page view"
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+log "Disable mail animations"
+defaults write com.apple.mail DisableReplyAnimations -bool true
+defaults write com.apple.mail DisableSendAnimations -bool true
+
+log "Suitable mail recipient names"
+defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
+log "Disable inline mail attachments"
+defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
+
+log "Disable Mail spellchecking"
+defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
+
+log "Enable developer mode in App Store"
+defaults write com.apple.appstore WebKitDeveloperExtras -bool true
+
+log "Enable debug menu in App Store"
+defaults write com.apple.appstore ShowDebugMenu -bool true
+
+log "Plain text smileys in Messages"
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticEmojiSubstitutionEnablediMessage" -bool false
+
+log "Disable spell checking in Messages"
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "continuousSpellCheckingEnabled" -bool false
+
+log "Set torrents incomplete directory for Transmission"
+defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
+defaults write org.m0k.transmission IncompleteDownloadFolder -string "${HOME}/Documents/Torrents"
+
+log "Don't prompt for download confirmation"
+defaults write org.m0k.transmission DownloadAsk -bool false
+
+log "Trash original torrent files"
+defaults write org.m0k.transmission DeleteOriginalTorrent -bool true
+
+log "Hide the donate messages"
+defaults write org.m0k.transmission WarningDonate -bool false
+
+log "Hide the legal disclaimer"
+defaults write org.m0k.transmission WarningLegal -bool false
