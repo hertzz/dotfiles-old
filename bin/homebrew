@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# dotfiles
+# https://github.com/hertzz/dotfiles
+#
+
+APPS_CORE=(coreutils moreutils findutils gnu-sed bash wget htop iftop openssl)
+APPS_DEV=(git git-flow python3)
+APPS_MEDIA=(ffmpeg youtube-dl)
+
+echo "Updating HomeBrew..."
+brew update
+brew upgrade --all
+
+echo "Installing core system applications..."
+for APP in ${APPS_CORE[@]}; do
+  brew install $APP
+done
+
+echo "Installing developer applications..."
+for APP in ${APPS_DEV[@]}; do
+  brew install $APP
+done
+
+echo "Installing media applications..."
+for APP in ${APPS_MEDIA[@]}; do
+  brew install $APP
+done
+
+echo "Installing other applications..."
+brew install vim --override-system-vi
