@@ -82,6 +82,7 @@ function dotfiles::__handler_setup_files() {
     dotfiles::log error "Couldn't find \"${HANDLER}\" handler!" && exit 1
   fi
 
+  local SKIPPED_FILES=0
   for FILE in $(find $HANDLERS_DIR/$HANDLER_NAME/files -depth 1); do
     FILE_BASENAME="$(basename $FILE)"
 
@@ -89,7 +90,7 @@ function dotfiles::__handler_setup_files() {
       dotfiles::log warn "Skipping excluded file \"${FILE_BASENAME}\""
     else
       if [ -s $HOME_DIRECTORY/$FILE_BASENAME ]; then
-        dotfiles::log info "File \"${FILE_BASENAME}\" is already linked! Skipping..."
+        SKIPPED_FILES=$((SKIPPED_FILES+1))
       else
         ln -s $FILE $HOME_DIRECTORY/$FILE_BASENAME &>/dev/null
         if [ $? -ne 0 ]; then
@@ -100,6 +101,12 @@ function dotfiles::__handler_setup_files() {
       fi
     fi
   done
+
+  if [ $SKIPPED_FILES -gt 0 ]; then
+    dotfiles::log info "Skipped ${SKIPPED_FILES} files..."
+  fi
+
+  dotfiles::log info "Finished linking files for \"${HANDLER_NAME}\" handler!"
 }
 
 dotfiles::main

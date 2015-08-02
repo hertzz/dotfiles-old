@@ -1,0 +1,24 @@
+[user]
+	name = Tom Johnson
+	email = tom@thebitcrusher.net
+[push]
+	default = simple
+[core]
+	excludesfile = /Users/tom/.gitignore_global
+[help]
+	autocorrect = 1
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red
+	new = green
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color]
+	ui = auto
