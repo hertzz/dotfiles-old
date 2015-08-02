@@ -11,6 +11,7 @@ HOME_DIRECTORY=${HOME_DIRECTORY:-"$HOME"}
 . $BASE_DIR/config.sh
 
 function dotfiles::main() {
+  local START_TIME=$(date +%s)
   dotfiles::log info "Starting..."
 
   # Make sure at least 1 handler specified
@@ -52,6 +53,9 @@ function dotfiles::main() {
       fi
     fi
   done
+  
+  local END_TIME=$(date +%s)
+  dotfiles::log info "Completed (in $((END_TIME-START_TIME)) secs)!"
 }
 
 function dotfiles::log() {
