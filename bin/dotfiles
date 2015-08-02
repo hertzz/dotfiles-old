@@ -92,7 +92,7 @@ function dotfiles::__handler_setup_files() {
       if [ -s $HOME_DIRECTORY/$FILE_BASENAME ]; then
         SKIPPED_FILES=$((SKIPPED_FILES+1))
       else
-        ln -s $FILE $HOME_DIRECTORY/$FILE_BASENAME &>/dev/null
+        ln -sf $FILE $HOME_DIRECTORY/$FILE_BASENAME &>/dev/null
         if [ $? -ne 0 ]; then
           dotfiles::log error "Failed to link \"${FILE_BASENAME}\"!"
         else
