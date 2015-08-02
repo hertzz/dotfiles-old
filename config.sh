@@ -10,4 +10,4 @@ HOME_DIRECTORY="${BASE_DIR}/home_sandbox"
 
 # List of handlers to load for dotfile
 # linking at runtime
-HANDLERS_ENABLED=(vim)
+HANDLERS_ENABLED=(aliases curl git screen vim wget zsh)

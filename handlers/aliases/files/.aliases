@@ -1,0 +1,3 @@
+for FILE in ".aliases.d/*"; do
+  . $FILE
+done
