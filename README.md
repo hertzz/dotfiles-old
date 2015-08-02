@@ -4,10 +4,7 @@ Dotfiles provides a simple way to manage your most important application configu
 
 ### Installation
 ```bash
-# Make sure /usr/local/bin is on your $PATH
-
 $ git clone git@github.com:hertzz/dotfiles.git ~/dotfiles
-$ ln -s ~/dotfiles/bin/dotfiles /usr/local/bin/dotfiles
 ```
 
 ### Running
