@@ -29,11 +29,23 @@ EXCLUDED_FILES=(.vitest)
 To add new dot files to be stored under version control and linked to your home directory, add new files under a specific handlers `files` directory, and the handler will automatically link this file at runtime.
 
 ### Configuration
+
+#### Home Directory
 If you wish to change the location of where your dot files are stored, you can change the `HOME_DIRECTORY` property in the `config.sh` configuration file:
 ```bash
 HOME_DIRECTORY="${BASE_DIR}/home_sandbox"
 ```
 By default, the home directory is based off the `$HOME` environment variable.
+
+#### Logging
+Dotfiles supports three different logging types:
+```bash
+stdout
+file
+both
+```
+
+By default, `stdout` logging output is used which writes messages directly to STDOUT. When `file` is used, it will write all messages to a date appended log file in the `log` directory at the root level of dotfiles. When `both` is used, you get the same logging functionality as both `stdout` and `file` logging combined.
 
 ### Getting changes
 
