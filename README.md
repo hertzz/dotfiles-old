@@ -54,3 +54,7 @@ both
 ```
 
 By default, `stdout` logging output is used which writes messages directly to STDOUT. When `file` is used, it will write all messages to a date appended log file in the `log` directory at the root level of dotfiles. When `both` is used, you get the same logging functionality as both `stdout` and `file` logging combined.
+
+#### Git synchronization
+Automatic synchronization from Git can be enabled/disabled by changing the `GIT_SYNC` property to either `true` or `false`.
+In addition, you can also set the branch that you wish dotfiles to automatically pull from at runtime using the `GIT_SYNC_BRANCH` property (remote/origin should be ommited).
