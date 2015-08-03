@@ -11,3 +11,8 @@
 # List of handlers to load for dotfile
 # linking at runtime
 HANDLERS_ENABLED=(aliases curl git screen vim wget zsh)
+
+# Where to log dotfiles output (default: stdout)
+# LOG_OUTPUT="stdout"
+# LOG_OUTPUT="file"
+# LOG_OUTPUT="both"
