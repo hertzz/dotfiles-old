@@ -38,6 +38,8 @@ To add new dot files to be stored under version control and linked to your home 
 
 ### Configuration
 
+Configuration properties should be overriden in the `config.sh` file. Current avaliable overrides are commented out by default.
+
 #### Home Directory
 If you wish to change the location of where your dot files are stored, you can change the `HOME_DIRECTORY` property in the `config.sh` configuration file:
 ```bash
