@@ -12,6 +12,14 @@ $ git clone git@github.com:hertzz/dotfiles.git ~/dotfiles
 $ ~/dotfiles/bin/dotfiles
 ```
 
+### Automation
+Add an entry into your user crontab to periodically update your dotfiles from GitHub and perform necessary linking:
+```bash
+# User crontab
+# Run dotfiles every morning at 6:00AM
+0 6 * * * ~/dotfiles/bin/dotfiles
+```
+
 ### Handlers
 Handlers represent individual applications which you want to manage dot files for.  To control which handlers are processed at runtime, you can modify the `config.sh` file and simply add or remove handlers from the `HANDLERS_ENABLED` array.
 
