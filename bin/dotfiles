@@ -53,7 +53,7 @@ function dotfiles::main() {
       fi
     fi
   done
-  
+
   local END_TIME=$(date +%s)
   dotfiles::log info "Completed (in $((END_TIME-START_TIME)) secs)!"
 }
@@ -93,9 +93,15 @@ function dotfiles::__handler_setup_files() {
     if [[ ${EXCLUDED_FILES[@]} =~ "${FILE_BASENAME}" ]]; then
       dotfiles::log warn "Skipping excluded file \"${FILE_BASENAME}\""
     else
-      if [ -s $HOME_DIRECTORY/$FILE_BASENAME ]; then
+      # Does link already exist
+      if [ -h $HOME_DIRECTORY/$FILE_BASENAME ]; then
         SKIPPED_FILES=$((SKIPPED_FILES+1))
       else
+        if test -f $HOME_DIRECTORY/$FILE_BASENAME || test -d $HOME_DIRECTORY/$FILE_BASENAME; then
+          # Backup existing file
+          mv $HOME_DIRECTORY/$FILE_BASENAME $HOME_DIRECTORY/$FILE_BASENAME.backup
+        fi
+
         ln -sf $FILE $HOME_DIRECTORY/$FILE_BASENAME &>/dev/null
         if [ $? -ne 0 ]; then
           dotfiles::log error "Failed to link \"${FILE_BASENAME}\"!"
