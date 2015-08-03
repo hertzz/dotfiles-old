@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# dotfiles
+# https://github.com/hertzz/dotfiles
+#
+
+PACKAGES_LANGS=(language-chef language-ejs language-puppet)
+PACKAGES_THEME=(monokai seti-syntax seti-ui unity-ui)
+PACKAGES_OTHER=(minimap)
+
+if ! which apm 2>&1 >/dev/null; then
+  echo "Couldn't locate Atom Package Manager (apm). Is Atom installed?" && exit 1
+fi
+
+FAILED_PACKAGES=()
+FAILED_PACKAGES_COUNT=0
+for GROUP in ${PACKAGES_LANGS[@]} ${PACKAGES_THEME[@]} ${PACKAGES_OTHER[@]}; do
+  eval "declare PACKAGES=${GROUP[@]}"
+  for PKG in ${PACKAGES[@]}; do
+    apm install $PKG &>/dev/null
+    if [ $? -eq 0 ]; then
+      echo "Installed package: ${PKG}!"
+    else
+      echo "Failed to install package: ${PKG}"
+      FAILED_PACKAGES+=($PKG)
+      FAILED_PACKAGES_COUNT=$((FAILED_PACKAGES_COUNT+1))
+    fi
+  done
+done
+
+if [ $FAILED_PACKAGES_COUNT -gt 0 ]; then
+  echo ""
+  echo "There were ${FAILED_PACKAGES_COUNT} failed packages (${FAILED_PACKAGES[@]})"
+fi
+
+echo "Done"
+exit 0
