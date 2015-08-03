@@ -7,6 +7,7 @@
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 HANDLERS_DIR="${BASE_DIR}/handlers"
 HOME_DIRECTORY=${HOME_DIRECTORY:-"$HOME"}
+LOG_OUTPUT=${LOG_OUTPUT:-"stdout"}
 
 . $BASE_DIR/config.sh
 
@@ -72,7 +73,20 @@ function dotfiles::log() {
     GAP="-- "
   fi
 
-  echo "[dotfiles/${TIME}]  ${LEVEL} ${GAP} ${MESSAGE}"
+  LOG_LINE="[dotfiles/${TIME}]  ${LEVEL} ${GAP} ${MESSAGE}"
+  DATE_Y=$(date +%Y)
+  DATE_M=$(date +%m)
+  DATE_D=$(date +%d)
+
+  LOG_FILE="${BASE_DIR}/log/dotfiles-${DATE_Y}-${DATE_M}-${DATE_D}.log"
+  if [[ $LOG_OUTPUT == "stdout" ]]; then
+    echo "${LOG_LINE}"
+  elif [[ $LOG_OUTPUT == "file" ]]; then
+    echo "${LOG_LINE}" >> $LOG_FILE
+  elif [[ $LOG_OUTPUT == "both" ]]; then
+    echo "${LOG_LINE}" >> $LOG_FILE
+    echo "${LOG_LINE}"
+  fi
 }
 
 function dotfiles::__handler_setup_files() {
