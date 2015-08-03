@@ -6,8 +6,11 @@
 
 BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
 HANDLERS_DIR="${BASE_DIR}/handlers"
+
 HOME_DIRECTORY=${HOME_DIRECTORY:-"$HOME"}
 LOG_OUTPUT=${LOG_OUTPUT:-"stdout"}
+GIT_SYNC=${GIT_SYNC:-true}
+GIT_SYNC_BRANCH=${GIT_SYNC_BRANCH:-"master"}
 
 . $BASE_DIR/config.sh
 
@@ -19,6 +22,11 @@ function dotfiles::main() {
   if [ ${#HANDLERS_ENABLED[@]} -lt 1 ]; then
     dotfiles::log error "No handlers have been specified in \"config.sh\""
     dotfiles::log error "See https://github.com/hertzz/dotfiles/README.md for more information" && exit 1
+  fi
+
+  # Git synchronization
+  if [[ $GIT_SYNC == true ]]; then
+    dotfiles::__git_sync
   fi
 
   # Test existence of home directory
@@ -131,6 +139,24 @@ function dotfiles::__handler_setup_files() {
   fi
 
   dotfiles::log info "Finished linking files for \"${HANDLER_NAME}\" handler!"
+}
+
+function dotfiles::__git_sync() {
+  if ! which git 2>&1 >/dev/null; then
+    dotfiles::log error "Couldn't find git executable in $PATH" && exit 1
+  fi
+
+  if [[ -z $GIT_SYNC_BRANCH ]]; then
+    dotfiles::log error "Skipping Git synchronization - branch not specified!"
+  else
+    dotfiles::log info "Synchronizing Git from origin/${GIT_SYNC_BRANCH} to ${BASE_DIR}"
+    git pull origin $GIT_SYNC_BRANCH &>/dev/null
+    if [ $? -eq 0 ]; then
+      dotfiles::log info "Successfully synchronized with Git (origin/${GIT_SYNC_BRANCH})"
+    else
+      dotfiles::log error "Failed to synchronize with Git (origin/${GIT_SYNC_BRANCH})"
+    fi
+  fi
 }
 
 dotfiles::main
