@@ -46,21 +46,3 @@ both
 ```
 
 By default, `stdout` logging output is used which writes messages directly to STDOUT. When `file` is used, it will write all messages to a date appended log file in the `log` directory at the root level of dotfiles. When `both` is used, you get the same logging functionality as both `stdout` and `file` logging combined.
-
-### Getting changes
-
-To update your dot files with the latest content from your GitHub fork, you need to pull your repository and re-run the dotfiles executable:
-```bash
-$ cd ~/dotfiles && git pull
-$ ./bin/dotfiles
-```
-
-### Making changes
-
-To upload your modified or new dotfiles, you need to add, commit and push those files to your GitHub fork:
-```bash
-$ cd ~/dotfiles
-$ git add <files>
-$ git commit -m "my new files"
-$ git push -u origin master
-```
