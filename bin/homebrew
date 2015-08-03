@@ -7,6 +7,7 @@
 APPS_CORE=(coreutils moreutils findutils gnu-sed bash wget htop iftop openssl)
 APPS_DEV=(git git-flow python3)
 APPS_MEDIA=(ffmpeg youtube-dl)
+
 BREW_DL_URL="https://raw.githubusercontent.com/Homebrew/install/master/install"
 
 if ! which brew 2>&1 >/dev/null; then
@@ -18,20 +19,30 @@ echo "Updating HomeBrew..."
 brew update
 brew upgrade --all
 
-echo "Installing core system applications..."
-for APP in ${APPS_CORE[@]}; do
-  brew install $APP
+echo "Installing Homebrew packages..."
+FAILED_PACKAGES=()
+FAILED_PACKAGES_COUNT=0
+for GROUP in ${APPS_CORE[@]} ${APPS_DEV[@]} ${APPS_MEDIA[@]}; do
+  eval "declare PACKAGES=${GROUP[@]}"
+  for PKG in ${PACKAGES[@]}; do
+    brew install $PKG &>/dev/null
+    if [ $? -eq 0 ]; then
+      echo "Installed package: ${PKG}!"
+    else
+      echo "Failed to install package: ${PKG}"
+      FAILED_PACKAGES+=($PKG)
+      FAILED_PACKAGES_COUNT=$((FAILED_PACKAGES_COUNT+1))
+    fi
+  done
 done
 
-echo "Installing developer applications..."
-for APP in ${APPS_DEV[@]}; do
-  brew install $APP
-done
-
-echo "Installing media applications..."
-for APP in ${APPS_MEDIA[@]}; do
-  brew install $APP
-done
+if [ $FAILED_PACKAGES_COUNT -gt 0 ]; then
+  echo ""
+  echo "There were ${FAILED_PACKAGES_COUNT} failed packages (${FAILED_PACKAGES[@]})"
+fi
 
 echo "Installing other applications..."
 brew install vim --override-system-vi
+
+echo "Done"
+exit 0
