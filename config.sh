@@ -6,7 +6,7 @@
 
 # List of handlers to load for dotfile
 # linking at runtime
-HANDLERS_ENABLED=(aliases curl git screen vim wget zsh)
+HANDLERS_ENABLED=(aliases curl go git screen vim wget zsh)
 
 # Override home directory location to
 # use something non-standard
