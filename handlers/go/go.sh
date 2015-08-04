@@ -54,10 +54,15 @@ function dotfiles::go::__paths() {
       else
         dotfiles::log info "Skipping adding GOPATH to .${GOSHELL}rc, already set"
       fi
+
+      # Ammend PATH
+      if ! grep "export PATH=\"\${GOPATH}:\${PATH}\"" "${HOME_DIRECTORY}/.${GOSHELL}rc" &>/dev/null; then
+        if echo "export PATH=\"\${GOPATH}:\${PATH}\"" >> "${HOME_DIRECTORY}/.${GOSHELL}rc"; then
+          dotfiles::log info "Successfully ammended PATH with GOPATH location!"
+        else
+          dotfiles::log error "Failed to ammend PATH with GOPATH location"
+        fi
+      fi
     fi
   done
 }
-
-
-#export GOPATH="~/src/go/workspace"
-#export PATH="${GOPATH}:${PATH}"
