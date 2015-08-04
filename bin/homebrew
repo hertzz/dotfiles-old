@@ -5,7 +5,7 @@
 #
 
 APPS_CORE=(coreutils moreutils findutils gnu-sed bash wget htop iftop openssl)
-APPS_DEV=(git git-flow python3)
+APPS_DEV=(git git-flow python3 go)
 APPS_MEDIA=(ffmpeg youtube-dl)
 
 BREW_DL_URL="https://raw.githubusercontent.com/Homebrew/install/master/install"
