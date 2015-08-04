@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# dotfiles
+# dotfiles::vim
 # https://github.com/hertzz/dotfiles
 #
 

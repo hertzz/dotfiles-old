@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
-# dotfiles::curl
+# dotfiles::go
 # https://github.com/hertzz/dotfiles
 #
 
-HANDLER_NAME="curl"
+HANDLER_NAME="go"
 
-function dotfiles::curl::init() {
+function dotfiles::go::init() {
   dotfiles::log info "Bootstrapping ${HANDLER_NAME} files..."
 }
