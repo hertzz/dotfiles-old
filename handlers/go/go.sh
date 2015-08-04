@@ -56,12 +56,14 @@ function dotfiles::go::__paths() {
       fi
 
       # Ammend PATH
-      if ! grep "export PATH=\"\${GOPATH}:\${PATH}\"" "${HOME_DIRECTORY}/.${GOSHELL}rc" &>/dev/null; then
-        if echo "export PATH=\"\${GOPATH}:\${PATH}\"" >> "${HOME_DIRECTORY}/.${GOSHELL}rc"; then
+      if ! grep "export PATH=\"\${GOPATH}/bin:\${PATH}\"" "${HOME_DIRECTORY}/.${GOSHELL}rc" &>/dev/null; then
+        if echo "export PATH=\"\${GOPATH}/bin:\${PATH}\"" >> "${HOME_DIRECTORY}/.${GOSHELL}rc"; then
           dotfiles::log info "Successfully ammended PATH with GOPATH location!"
         else
           dotfiles::log error "Failed to ammend PATH with GOPATH location"
         fi
+      else
+        dotfiles::log info "Skipping ammending PATH with GOPATH location"
       fi
     fi
   done
