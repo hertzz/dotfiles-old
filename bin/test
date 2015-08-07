@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# dotfiles
+# https://github.com/hertzz/dotfiles
+#
+
+BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/.."
+HANDLERS_DIR="${BASE_DIR}/handlers"
+TESTS_DIR="${BASE_DIR}/tests"
+
+. $TESTS_DIR/test_helper.sh
+
+for TEST in $(ls -1 $TESTS_DIR/handlers); do
+  TEST_NAME=$(basename $TEST | cut -f1 -d_)
+
+  if ! . $TESTS_DIR/handlers/$TEST &>/dev/null; then
+    echo "Failed to load test \"${TEST_NAME}\"!" && exit 1
+  else
+    dotfiles::test::${TEST_NAME}::init
+    dotfiles::test::__generic::syntax "${TEST_NAME}"
+  fi
+done
