@@ -63,3 +63,13 @@ By default, `stdout` logging output is used which writes messages directly to ST
 #### Synchronization
 Automatic synchronization from Git can be enabled/disabled by changing the `GIT_SYNC` property to either `true` or `false`.
 In addition, you can also set the branch that you wish dotfiles to automatically pull from at runtime using the `GIT_SYNC_BRANCH` property (remote/origin should be ommited).
+
+### Developer Notes
+
+#### Tests
+Basic syntax validation for handlers can be tested by running the following command:
+```bash
+$ ~/dotfiles/bin/test
+```
+
+When adding a new handler, ensure the appropriate bootstrap file has been implemented and that running the test script passes before sending any pull requests.
