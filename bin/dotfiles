@@ -112,7 +112,7 @@ function dotfiles::__handler_setup_files() {
   for FILE in $(find $HANDLERS_DIR/$HANDLER_NAME/files -depth 1); do
     FILE_BASENAME="$(basename $FILE)"
 
-    if [[ ${EXCLUDED_FILES[@]} =~ "${FILE_BASENAME}" ]]; then
+    if [[ ${EXCLUDED_FILES[@]} =~ "${FILE_BASENAME}" || ${GLOBAL_EXCLUDED_FILES[@]} =~ "${FILE_BASENAME}" ]]; then
       dotfiles::log warn "Skipping excluded file \"${FILE_BASENAME}\""
     else
       # Does link already exist
