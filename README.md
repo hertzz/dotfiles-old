@@ -3,11 +3,14 @@
 Dotfiles provides a simple way to manage your most important application configuration files that live in your home directory. Dotfiles are stored under version control and then linked in to your home directory from the checked out repository.
 
 ### Installation
+1. Fork the repository
+
+2. Clone your fork to local filesystem:
 ```bash
-$ git clone git@github.com:hertzz/dotfiles.git ~/dotfiles
+$ git clone git@github.com:<username>/dotfiles.git ~/dotfiles
 ```
 
-### Running
+### Manual Run
 ```bash
 $ ~/dotfiles/bin/dotfiles
 ```
@@ -57,6 +60,6 @@ both
 
 By default, `stdout` logging output is used which writes messages directly to STDOUT. When `file` is used, it will write all messages to a date appended log file in the `log` directory at the root level of dotfiles. When `both` is used, you get the same logging functionality as both `stdout` and `file` logging combined.
 
-#### Git synchronization
+#### Synchronization
 Automatic synchronization from Git can be enabled/disabled by changing the `GIT_SYNC` property to either `true` or `false`.
 In addition, you can also set the branch that you wish dotfiles to automatically pull from at runtime using the `GIT_SYNC_BRANCH` property (remote/origin should be ommited).
