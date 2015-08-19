@@ -11,6 +11,7 @@ HOME_DIRECTORY=${HOME_DIRECTORY:-"$HOME"}
 LOG_OUTPUT=${LOG_OUTPUT:-"stdout"}
 GIT_SYNC=${GIT_SYNC:-true}
 GIT_SYNC_BRANCH=${GIT_SYNC_BRANCH:-"master"}
+GIT_SYNC_OVERWRITE=${GIT_SYNC_OVERWRITE:-"true"}
 
 . $BASE_DIR/config.sh
 
@@ -149,8 +150,15 @@ function dotfiles::__git_sync() {
   if [[ -z $GIT_SYNC_BRANCH ]]; then
     dotfiles::log error "Skipping Git synchronization - branch not specified!"
   else
-    dotfiles::log info "Synchronizing Git from origin/${GIT_SYNC_BRANCH} to ${BASE_DIR}"
-    git pull origin $GIT_SYNC_BRANCH &>/dev/null
+    dotfiles::log info "Synchronizing Git from origin/${GIT_SYNC_BRANCH} to ${BASE_DIR} (override=${GIT_SYNC_OVERWRITE})"
+
+    local CLI_ARGS=""
+    if [[ $GIT_SYNC_OVERWRITE == true ]]; then
+      CLI_ARGS="--rebase"
+      git stash save --keep-index &>/dev/null
+    fi
+
+    git pull $CLI_ARGS origin $GIT_SYNC_BRANCH &>/dev/null
     if [ $? -eq 0 ]; then
       dotfiles::log info "Successfully synchronized with Git (origin/${GIT_SYNC_BRANCH})"
     else

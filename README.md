@@ -63,6 +63,7 @@ By default, `stdout` logging output is used which writes messages directly to ST
 #### Synchronization
 Automatic synchronization from Git can be enabled/disabled by changing the `GIT_SYNC` property to either `true` or `false`.
 In addition, you can also set the branch that you wish dotfiles to automatically pull from at runtime using the `GIT_SYNC_BRANCH` property (remote/origin should be ommited).
+Local dotfiles overwriting can be controlled using the `GIT_SYNC_OVERWRITE` property. When set to `true`, conflicting handler files will be overwritten via a git rebase, and when false, conflicts will be ignored.
 
 ### Developer Notes
 
