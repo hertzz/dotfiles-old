@@ -19,6 +19,7 @@ GLOBAL_EXCLUDED_FILES=(.gitkeep)
 # Synchronisation settings
 # GIT_SYNC=true
 # GIT_SYNC_BRANCH="master"
+# GIT_SYNC_OVERWRITE=true
 
 # Where to log dotfiles output (default: stdout)
 # LOG_OUTPUT="stdout"
