@@ -74,3 +74,5 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export GOPATH="/Users/tom/src/go/workspace"
+export PATH="${GOPATH}/bin:${PATH}"
