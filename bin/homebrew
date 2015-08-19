@@ -4,9 +4,10 @@
 # https://github.com/hertzz/dotfiles
 #
 
-APPS_CORE=(coreutils moreutils findutils gnu-sed bash wget htop iftop openssl)
-APPS_DEV=(git git-flow python3 go)
+APPS_CORE=(brew-cask coreutils moreutils findutils gnu-sed bash wget htop iftop openssl)
+APPS_DEV=(git git-flow python3 go mongodb bash zsh)
 APPS_MEDIA=(ffmpeg youtube-dl)
+APPS_SECURITY=(chkrootkit)
 
 BREW_DL_URL="https://raw.githubusercontent.com/Homebrew/install/master/install"
 
@@ -22,7 +23,7 @@ brew upgrade --all
 echo "Installing Homebrew packages..."
 FAILED_PACKAGES=()
 FAILED_PACKAGES_COUNT=0
-for GROUP in ${APPS_CORE[@]} ${APPS_DEV[@]} ${APPS_MEDIA[@]}; do
+for GROUP in ${APPS_CORE[@]} ${APPS_DEV[@]} ${APPS_MEDIA[@]} ${APPS_SECURITY[@]}; do
   eval "declare PACKAGES=${GROUP[@]}"
   for PKG in ${PACKAGES[@]}; do
     brew install $PKG &>/dev/null
