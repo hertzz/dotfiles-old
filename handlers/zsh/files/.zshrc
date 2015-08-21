@@ -76,3 +76,9 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export GOPATH="/Users/tom/src/go/workspace"
 export PATH="${GOPATH}/bin:${PATH}"
+
+# PHP 5.6
+export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+
+# Laravel
+export PATH="/Users/tom/.composer/vendor/bin:$PATH"
