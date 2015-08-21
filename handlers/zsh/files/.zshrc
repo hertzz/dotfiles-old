@@ -81,4 +81,8 @@ export PATH="${GOPATH}/bin:${PATH}"
 export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
 
 # Laravel
-export PATH="/Users/tom/.composer/vendor/bin:$PATH"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+# Rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export PATH="$HOME/.rbenv/bin:$PATH"
