@@ -7,7 +7,7 @@
 APPS_CORE=(brew-cask coreutils moreutils findutils gnu-sed bash wget htop iftop openssl)
 APPS_DEV=(git git-flow python3 go mongodb bash zsh homebrew/php/php56 homebrew/php/composer rbenv ruby-build)
 APPS_MEDIA=(ffmpeg youtube-dl)
-APPS_SECURITY=(chkrootkit)
+APPS_SECURITY=(chkrootkit apg)
 
 BREW_DL_URL="https://raw.githubusercontent.com/Homebrew/install/master/install"
 

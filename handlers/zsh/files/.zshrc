@@ -85,4 +85,3 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 
 # Rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export PATH="$HOME/.rbenv/bin:$PATH"
