@@ -5,7 +5,7 @@
 #
 
 APPS_CORE=(brew-cask coreutils moreutils findutils gnu-sed bash wget htop iftop openssl)
-APPS_DEV=(git git-flow python3 go mongodb bash zsh php56 composer)
+APPS_DEV=(git git-flow python3 go mongodb bash zsh homebrew/php/php56 homebrew/php/composer)
 APPS_MEDIA=(ffmpeg youtube-dl)
 APPS_SECURITY=(chkrootkit)
 
