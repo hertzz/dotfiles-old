@@ -87,5 +87,5 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Java
-export JAVA_HOME="$(/usr/libexec/java_home -v 1.8.0_60)"
+export JAVA_HOME="$(/usr/libexec/java_home -v 1.8)"
 export PATH="${JAVA_HOME}/bin:${PATH}"
